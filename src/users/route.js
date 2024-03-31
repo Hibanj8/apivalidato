@@ -1,9 +1,7 @@
 const express = require("express");
+const router = express.Router();
 const Joi = require("joi");
-const User = require("./models/User");
-
-const app = express();
-app.use(express.json());
+const User = require("../models/User");
 
 const userSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
@@ -13,8 +11,7 @@ const userSchema = Joi.object({
   birthdate: Joi.date().max("now"),
 });
 
-// Route pour l'inscription d'un nouvel utilisateur
-app.post("/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   const userData = req.body;
 
   const { error, value } = userSchema.validate(userData);
@@ -33,6 +30,4 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+module.exports = router;
