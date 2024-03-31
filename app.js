@@ -6,7 +6,7 @@ const connectionString = process.env.DB_CONNECTION_STRING;
 
 app.use(express.json());
 
-app.use("/users", userRoutes);
+app.use("/users", userRouter);
 
 const startserver = async () => {
   try {
